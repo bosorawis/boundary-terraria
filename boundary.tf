@@ -33,8 +33,8 @@ resource "boundary_credential_ssh_private_key" "my_private_key" {
 }
 
 resource "boundary_target" "foo" {
-  name                 = "my first ssh target"
-  description          = "first ssh target ever"
+  name                 = "Terraria Server - SSH"
+  description          = "Used for SSH-ing into Terraria Server"
   type                 = "ssh"
   default_port         = "22"
   scope_id             = boundary_scope.project.id
@@ -43,4 +43,15 @@ resource "boundary_target" "foo" {
   injected_application_credential_source_ids = [
     boundary_credential_ssh_private_key.my_private_key.id
   ]
+}
+
+
+resource "boundary_target" "terraria_game_target" {
+  name                 = "Terraria Server - Gameplay"
+  description          = "Used for connecting to Terraria Server with Terraria Client"
+  type                 = "tcp"
+  default_port         = "7777"
+  scope_id             = boundary_scope.project.id
+  address              = aws_instance.ssh-target.private_ip
+  egress_worker_filter = "\"downstream\" in \"/tags/type\""
 }

@@ -5,14 +5,14 @@ WORKDIR /boundary
 RUN apk update && \
     apk add curl unzip
 
-RUN curl -o boundary-worker.zip https://releases.hashicorp.com/boundary-worker/0.12.3+hcp/boundary-worker_0.12.3+hcp_linux_amd64.zip && \
-    unzip boundary-worker.zip && \
-    chmod +x boundary-worker
+RUN curl -o boundary.zip https://releases.hashicorp.com/boundary/0.13.1+ent/boundary_0.13.1+ent_linux_amd64.zip && \
+    unzip boundary.zip && \
+    chmod +x boundary
 
 
 FROM alpine
 WORKDIR /boundary
-COPY --from=builder /boundary/boundary-worker boundary-worker
+COPY --from=builder /boundary/boundary boundary
 
 RUN apk update && \
         apk add curl jq
@@ -24,4 +24,4 @@ COPY entrypoint.sh entrypoint.sh
 RUN chmod +x entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["./boundary-worker", "server", "-config=./worker.hcl"]
+CMD ["./boundary", "server", "-config=./worker.hcl"]
