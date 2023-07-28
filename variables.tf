@@ -56,3 +56,8 @@ variable "hcp_boundary_password" {
   type = string
   description = "HCP Boundary cluster password"
 }
+
+variable "worker_count" {
+  type = number
+  description = "Number of Boundary worker to spin up"
+}

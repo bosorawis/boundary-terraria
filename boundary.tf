@@ -32,12 +32,6 @@ resource "boundary_credential_ssh_private_key" "my_private_key" {
   private_key         = tls_private_key.ssh_key.private_key_pem
 }
 
-resource "boundary_worker" "byow_worker" {
-  depends_on = [boundary_scope.project]
-  scope_id   = boundary_scope.project.id
-}
-
-
 resource "boundary_target" "foo" {
   name                 = "my first ssh target"
   description          = "first ssh target ever"
