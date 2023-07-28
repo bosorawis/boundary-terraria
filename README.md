@@ -204,7 +204,7 @@ Select `Terraria Server - Gameplay` and click `Connect`
 Find the target ID from previous steps
 
 ```bash
-> boundary connect -target-id=ttcp_2CshywYXYT
+> boundary connect -target-id=<tcp-id>
 
   Address:             127.0.0.1
   Connection Limit:    -1
