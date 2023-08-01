@@ -1,11 +1,11 @@
 resource "aws_instance" "ssh-target" {
   ami                  = data.aws_ami.ubuntu.id
-  instance_type        = "t3.micro"
+  instance_type        = "t3.medium"
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
   subnet_id            = aws_subnet.private[1].id
   key_name             = aws_key_pair.generated_key.key_name
   tags                 = {
-    Name = "ssh-target"
+    Name = "Terraria"
   }
 }
 
